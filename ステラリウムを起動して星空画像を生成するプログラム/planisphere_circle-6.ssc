@@ -1,0 +1,39 @@
+//template.sscに値が入ったバージョン。
+//値が新しくなるごとに、ここの値が新しくなったコードに上書きされていく
+
+
+
+// 1. 観測地と日時
+core.setObserverLocation(139.75, 35.68, 0, "TargetLocation");
+core.setDate("2026-01-01T21:00:00", "local");
+
+// 2. 投影法の設定
+// 以前のログに基づき "ProjectionStereographic" を指定します
+core.setProjectionMode("ProjectionStereographic");
+
+// 3. 視点と画角の設定
+core.moveToAltAzi(90, 180, 0);  // 天頂を見上げる
+StelMovementMgr.zoomTo(180, 0); // 180度（全天）表示
+
+// 4. 星を見やすくする設定（数値を少し下げて自然にしました）
+StelSkyDrawer.setRelativeStarScale(1.5);
+StelSkyDrawer.setAbsoluteStarScale(1.2);
+
+// 5. 表示物のON/OFF
+StelMovementMgr.setFlagTracking(false);
+ConstellationMgr.setFlagLines(true);    // 星座線
+ConstellationMgr.setFlagLabels(true);   // 星座名
+LandscapeMgr.setFlagAtmosphere(false);  // 大気OFF
+LandscapeMgr.setFlagLandscape(false);   // 地面OFF
+
+// エラーの原因になる天の川や方位表示は削除しました
+
+// 6. 待機（描画安定のため5秒）
+core.wait(5);
+
+// 7. スクリーンショット
+//core.screenshot("planisphere_final-2-1.png", false);
+core.screenshot("planisphere_final-2-1", false, "", true);
+
+// 終了
+core.quit();
